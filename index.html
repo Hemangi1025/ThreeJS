@@ -1,0 +1,39 @@
+<html>
+	<head>
+		<title>My first three.js app</title>
+		<style>
+			body { margin: 0; }
+			canvas { display: block; }
+		</style>
+	</head>
+	<body>
+		<script src="three.js"></script>
+		<script>
+			var scene = new THREE.Scene();  //Creating a scene 
+			var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 ); //Setting camera with perspective(normal) type
+
+			var renderer = new THREE.WebGLRenderer(); //Setting up renderer
+			renderer.setSize( window.innerWidth, window.innerHeight ); //setsize method to set rendering resolution
+			document.body.appendChild( renderer.domElement ); //Appending to html body
+
+			var geometry = new THREE.BoxBufferGeometry(); //Creating geometry using Box Geometry as we are showing cube
+			var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } ); //Material to define characteristics of skin such as opacity,texture,etc
+			var cube = new THREE.Mesh( geometry, material ); //Creating a cube
+			scene.add( cube ); //Adding cube to scene
+
+			camera.position.z = 5;
+
+			//Adding animation to the cube
+			var animate = function () {
+				requestAnimationFrame( animate );
+
+				cube.rotation.x += 0.01;
+				cube.rotation.y += 0.01;
+
+				renderer.render( scene, camera );
+			};
+
+			animate();
+		</script>
+	</body>
+</html>
